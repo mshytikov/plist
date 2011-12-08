@@ -1,5 +1,8 @@
 = plist - All-purpose Property List manipulation library
 
+2011-12-08:
+ * Added null keys support to dict
+
 === Release version 3.0.0!
 
 2010-02-23:
