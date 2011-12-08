@@ -70,6 +70,12 @@ class TestParser < Test::Unit::TestCase
     assert_equal("2", data['key']['subkey'])
   end
 
+  #special functionality with null keys to allow have null values in dict 
+  def test_nil_dict_value
+    data = Plist::parse_xml("test/assets/test_null_keys.plist");
+    assert_equal({'key' => 'not_null_key', 'key1' => nil, 'key2' => nil}, data)
+  end
+
   # bug fix for decoding entities
   #  reported by Matthias Peick <matthias@peick.de>
   def test_decode_entities

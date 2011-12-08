@@ -59,6 +59,22 @@ END
 END
     assert_equal expected, {:ary => [1,:b,'3']}.to_plist(false)
   end
+  
+  #special functionality with null keys to allow have null values in dict 
+  def test_hash_with_nil_values
+    expected = <<END
+<dict>
+	<key>not_nil_key</key>
+	<string>test</string>
+	<key>null_keys</key>
+	<array>
+		<string>key1</string>
+		<string>key2</string>
+	</array>
+</dict>
+END
+    assert_equal expected, {:not_nil_key => "test", :key1 => nil, :key2 => nil}.to_plist(false)
+  end
 
   def test_array_with_hash_element
     expected = <<END
