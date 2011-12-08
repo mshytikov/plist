@@ -152,6 +152,9 @@ module Plist
         end
       end
 
+      null_keys = dict.delete("null_keys")
+      null_keys.each{ |k| dict[k] = nil } if null_keys
+
       dict
     end
   end

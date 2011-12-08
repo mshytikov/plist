@@ -77,11 +77,21 @@ module Plist::Emit
           output << "<dict/>\n"
         else
           inner_tags = []
+          null_keys = []
 
           element.keys.sort.each do |k|
             v = element[k]
-            inner_tags << tag('key', CGI::escapeHTML(k.to_s))
-            inner_tags << plist_node(v)
+            if v.nil?
+              null_keys << k;
+            else
+              inner_tags << tag('key', CGI::escapeHTML(k.to_s))
+              inner_tags << plist_node(v)
+            end
+          end
+
+          unless null_keys.empty?
+            inner_tags << tag('key', CGI::escapeHTML('null_keys'))
+            inner_tags << plist_node(null_keys)
           end
 
           output << tag('dict') {
