@@ -109,6 +109,11 @@ When you attempt to serialize a +MyFancyString+ object, the +to_plist_node+ meth
 
 If for whatever reason you can't add this method, your object will be serialized with <tt>Marshal.dump</tt> instead.
 
+==== Null Keys Extension
+This version supports null values in dict.
+The main idea is a usage reserved keyword "null_keys" used in dict as key and value is an array with keys names for which value is null
+
+
 == Links
 
 [Project Page]  http://plist.rubyforge.org
