@@ -4,11 +4,15 @@ require 'test/unit'
 require 'plist'
 require 'stringio'
 
-class MarshalableObject
+class RegularObject
   attr_accessor :foo
 
   def initialize(str)
     @foo = str
+  end
+
+  def to_s
+    @foo
   end
 end
 
@@ -18,33 +22,12 @@ class TestDataElements < Test::Unit::TestCase
     @result = Plist.parse_xml( 'test/assets/test_data_elements.plist' )
   end
 
-  def test_data_object_header
-    expected = <<END
-<!-- The <data> element below contains a Ruby object which has been serialized with Marshal.dump. -->
-<data>
-BAhvOhZNYXJzaGFsYWJsZU9iamVjdAY6CUBmb28iHnRoaXMgb2JqZWN0IHdhcyBtYXJz
-aGFsZWQ=
-</data>
-END
-    expected_elements = expected.chomp.split( "\n" )
-
-    actual = Plist::Emit.dump( Object.new, false )
-    actual_elements = actual.chomp.split( "\n" )
-
-    # check for header
-    assert_equal expected_elements.shift, actual_elements.shift
-
-    # check for opening and closing data tags
-    assert_equal expected_elements.shift, actual_elements.shift
-    assert_equal expected_elements.pop, actual_elements.pop
-  end
-
-  def test_marshal_round_trip
-    expected = MarshalableObject.new('this object was marshaled')
+  def test_regular_object_round_trip
+    str = "This object was auto converted"
+    expected = RegularObject.new(str)
     actual   = Plist.parse_xml( Plist::Emit.dump(expected, false) )
 
-    assert_kind_of expected.class, actual
-    assert_equal expected.foo, actual.foo
+    assert_equal str, actual
   end
 
   def test_generator_io_and_file

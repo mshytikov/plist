@@ -15,10 +15,5 @@
     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     AAAAAAAAAAAAAA==
     </data>
-    <key>marshal</key>
-    <!-- The <data> element below contains a Ruby object which has been serialized with Marshal.dump. -->
-    <data>BAhvOhZNYXJzaGFsYWJsZU9iamVjdAY6CUBmb28iHnRoaXMgb2JqZWN0IHdh
-    cyBtYXJzaGFsZWQ=
-    </data>
   </dict>
 </plist>

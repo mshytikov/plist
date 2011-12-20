@@ -117,10 +117,7 @@ module Plist::Emit
         Base64::encode64(contents).gsub(/\s+/, '').scan(/.{1,68}/o) { data << $& << "\n" }
         output << tag('data', data)
       else
-        output << comment( 'The <data> element below contains a Ruby object which has been serialized with Marshal.dump.' )
-        data = "\n"
-        Base64::encode64(Marshal.dump(element)).gsub(/\s+/, '').scan(/.{1,68}/o) { data << $& << "\n" }
-        output << tag('data', data )
+        output << plist_node(element.to_plist)
       end
     end
 
@@ -236,4 +233,9 @@ end
 
 class Hash #:nodoc:
   include Plist::Emit
+end
+class Object #:nodoc:
+  def to_plist
+    to_s
+  end
 end
