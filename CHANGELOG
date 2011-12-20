@@ -1,5 +1,8 @@
 = plist - All-purpose Property List manipulation library
 
+2011-12-20:
+ * Default Object marshaling replaced with '#to_plist' method in Object
+
 2011-12-08:
  * Added null keys support to dict
 

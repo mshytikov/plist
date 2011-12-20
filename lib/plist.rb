@@ -17,5 +17,5 @@ require 'plist/generator'
 require 'plist/parser'
 
 module Plist
-  VERSION = '3.1.0'
+  VERSION = '4.0.0'
 end
